@@ -6,9 +6,47 @@
  *  Created by Ryan Faulkner on 2015-06-13
  */
 
-#include "redisORM.h"
+#include <iostream>
+#include <string>
+#include <vector>
 
-using namespace std;
+#include "hiredis/hiredis.h"
+
+#define REDISHOST "127.0.0.1"
+#define REDISPORT 6379
+#define REDISDB "myredisdb"
+
+
+/**
+ *  Defines interface to redis server
+ */
+class RedisHandler {
+
+    std::string host;
+    int port;
+
+    redisContext *context;
+
+public:
+    RedisHandler() { this->host = REDISHOST; this->port = REDISPORT; }
+    RedisHandler(std::string host, int port) { this->host = host; this->port = port; }
+
+    void connect();
+
+    void write(std::string, std::string);
+    void writeHashMap(std::string, std::string, std::string);
+    void incrementHashMap(std::string, std::string, int);
+    void incrementKey(std::string, int);
+    void decrementKey(std::string, int);
+    void deleteKey(std::string);
+
+    bool exists(std::string);
+
+    std::string read(std::string);
+    std::string readHashMap(std::string, std::string);
+    std::vector<std::string> keys(std::string);
+};
+
 
 /** Establishes a connection to a redis instance */
 void RedisHandler::connect() { this->context = redisConnect(REDISHOST, REDISPORT); }
@@ -73,7 +111,7 @@ bool RedisHandler::exists(std::string key) {
 
 /** Read a value from redis given a key pattern */
 std::vector<std::string> RedisHandler::keys(std::string pattern) {
-    std::vector<string> elems;
+    std::vector<std::string> elems;
     redisReply *reply = (redisReply*)redisCommand(this->context, "KEYS %s", pattern.c_str());
 
     // Determine if the reply is an array and iterate through elems if so
