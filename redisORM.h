@@ -1,7 +1,7 @@
 /*
- *  main.c
+ *  redisORM.h
  *
- *  Handles the interface to redis
+ *  Defines the interface to redis ORM
  *
  *  Created by Ryan Faulkner on 2015-06-13
  */
