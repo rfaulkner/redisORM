@@ -17,7 +17,7 @@ Install hiredis:
 
 Build object code linking hiredis:
 
-   	$ g++ -std=c++0x -o redisORM.o /usr/lib/libhiredis.a -c main.c
+   	$ g++ -std=c++0x -o redisORM.o /usr/lib/libhiredis.a -c redisORM.c
 
 You can include redisORM in your project with:
 
