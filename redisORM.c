@@ -3,7 +3,7 @@
  *
  *  Handles the interface to redis
  *
- *  Created by Ryan Faulkner on 20145-06-13
+ *  Created by Ryan Faulkner on 2015-06-13
  */
 
 #include <iostream>
