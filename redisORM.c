@@ -85,6 +85,3 @@ std::vector<std::string> RedisHandler::keys(std::string pattern) {
     freeReplyObject(reply);
     return elems;
 }
-
-#endif
-
